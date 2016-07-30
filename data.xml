@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CATALOG>
+	<ITEM NUMBER = "1">
+		<POINT>1.1.1.1</POINT>
+		<TITLE>Ensure mounting of cramfs filesystems is disabled</TITLE>
+		<DESCRIPTION>The cramfs filesystem type is a compressed read-only Linux filesystem embedded in small
+	        &#xA; footprint systems. A cramfs image can be used without having to first decompress the image.</DESCRIPTION>
+		<CAUTION>- NA -</CAUTION>
+		<AUDIT>check_modprob("cramfs")</AUDIT>
+		<SOLUTION>solve_modprob("cramfs")</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>2</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "2">
+		<POINT>1.1.1.2</POINT>
+	        <TITLE>Ensure mounting of freevxfs filesystems is disabled</TITLE>
+	        <DESCRIPTION>The freevxfs filesystem type is a free version of the Veritas type filesystem. This is the
+	        &#xA; primary filesystem type for HP-UX operating systems.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_modprob("freevxfs")</AUDIT>
+		<SOLUTION>solve_modprob("freevxfs")</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>2</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "3">
+		<POINT>1.1.1.3</POINT>
+        	<TITLE>Ensure mounting of jffs2 filesystems is disabled</TITLE>
+        	<DESCRIPTION>The jffs2 (journaling flash filesystem 2) filesystem type is a log-structured filesystem
+	        &#xA; used in flash memory devices.</DESCRIPTION>
+        	<CAUTION>- NA -</CAUTION>
+        	<AUDIT>check_modprob("jffs2")</AUDIT>
+		<SOLUTION>solve_modprob("jffs2")</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>2</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "4">
+		<POINT>1.1.1.4</POINT>
+	        <TITLE>Ensure mounting of hfs filesystems is disabled</TITLE>
+	        <DESCRIPTION>The hfs filesystem type is a hierarchical filesystem that allows you to mount Mac OS
+	        &#xA; filesystems.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_modprob("hfs")</AUDIT>
+		<SOLUTION>solve_modprob("hfs")</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>2</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "5">
+		<POINT>1.1.1.5</POINT>
+	        <TITLE>Ensure mounting of hfsplus filesystems is disabled</TITLE>
+	        <DESCRIPTION>The hfsplus filesystem type is a hierarchical filesystem designed to replace hfs that
+	        &#xA; allows you to mount Mac OS filesystems.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_modprob("hfsplus")</AUDIT>
+		<SOLUTION>solve_modprob("hfsplus")</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>2</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "6">
+		<POINT>1.1.1.6</POINT>
+	        <TITLE>Ensure mounting of squashfs filesystems is disabled</TITLE>
+	        <DESCRIPTION>The squashfs filesystem type is a compressed read-only Linux filesystem embedded in
+	        &#xA; small footprint systems (similar to cramfs). A squashfs image can be used without having
+	        &#xA; to first decompress the image.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_modprob("squashfs")</AUDIT>
+		<SOLUTION>solve_modprob("squashfs")</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>2</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "7">
+		<POINT>1.1.1.7</POINT>
+	        <TITLE>Ensure mounting of udf filesystems is disabled</TITLE>
+	        <DESCRIPTION>The udf filesystem type is the universal disk format used to implement ISO/IEC 13346 and
+	        &#xA; ECMA-167 specifications. This is an open vendor filesystem type for data storage on a
+	        &#xA; broad range of media. This filesystem type is necessary to support writing DVDs and newer
+	        &#xA; optical disc formats.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_modprob("udf")</AUDIT>
+		<SOLUTION>solve_modprob("udf")</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>2</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "8">
+		<POINT>1.1.1.8</POINT>
+	        <TITLE>Ensure mounting of vfat filesystems is disabled</TITLE>
+	        <DESCRIPTION>Removing support for unneeded filesystem types reduces the local attack surface of the server.</DESCRIPTION>
+	        <CAUTION>FAT filesystems are often used on portable USB sticks and other flash media are commonly
+	        &#xA; used to transfer files between workstations, removing VFAT support may prevent the
+	        &#xA; ability to transfer files in this way.</CAUTION>
+	        <AUDIT>check_modprob("vfat")</AUDIT>
+		<SOLUTION>solve_modprob("vfat")</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>2</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "9">
+		<POINT>1.1.2</POINT>
+	        <TITLE>Ensure separate partition exists for /tmp</TITLE>
+	        <DESCRIPTION>The /tmp directory is a world-writable directory used for temporary storage by all users and some applications.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_separate_partition("/tmp")</AUDIT>
+		<SOLUTION>dummy()</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>3</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "10">
+		<POINT>1.1.3</POINT>
+	        <TITLE>Ensure nodev option set on /tmp partition</TITLE>
+	        <DESCRIPTION>The nodev mount option specifies that the filesystem cannot contain special devices.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_flag_partition("/tmp","nodev")</AUDIT>
+		<SOLUTION>dummy()</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>3</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "11">
+		<POINT>1.1.4</POINT>
+	        <TITLE>Ensure nosuid option set on /tmp partition</TITLE>
+	        <DESCRIPTION>The nosuid mount option specifies that the filesystem cannot contain setuid files.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_flag_partition("/tmp","nosuid")</AUDIT>
+		<SOLUTION>dummy()</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>3</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "12">
+		<POINT>1.1.5</POINT>
+	        <TITLE>Ensure noexec option set on /tmp partition</TITLE>
+	        <DESCRIPTION>The noexec mount option specifies that the filesystem cannot contain executable binaries.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_flag_partition("/tmp","noexec")</AUDIT>
+		<SOLUTION>dummy()</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>3</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "13">
+		<POINT>1.1.6</POINT>
+	        <TITLE>Ensure separate partition exists for /var</TITLE>
+	        <DESCRIPTION>The /var directory is used by daemons and other system services to temporarily store
+	        &#xA; dynamic data. Some directories created by these processes may be world-writable.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_separate_partition("/var")</AUDIT>
+		<SOLUTION>dummy()</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>3</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "14">
+		<POINT>1.1.7</POINT>
+	        <TITLE>Ensure separate partition exists for /var/tmp</TITLE>
+	        <DESCRIPTION>The /var/tmp directory is a world-writable directory used for temporary storage by all
+	        &#xA; users and some applications.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_separate_partition("/var/tmp")</AUDIT>
+		<SOLUTION>dummy()</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>3</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "15">
+		<POINT>1.1.8</POINT>
+	        <TITLE>Ensure nodev option set on /var/tmp partition</TITLE>
+	        <DESCRIPTION>The nodev mount option specifies that the filesystem cannot contain special devices.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_flag_partition("/var/tmp","nodev")</AUDIT>
+		<SOLUTION>dummy()</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>3</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "16">
+		<POINT>1.1.9</POINT>
+	        <TITLE>Ensure nosuid option set on /var/tmp partition</TITLE>
+	        <DESCRIPTION>The nosuid mount option specifies that the filesystem cannot contain setuid files.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_flag_partition("/var/tmp","nosuid")</AUDIT>
+		<SOLUTION>dummy()</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>3</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "17">
+		<POINT>1.1.10</POINT>
+	        <TITLE>Ensure noexec option set on /var/tmp partition</TITLE>
+	        <DESCRIPTION>The noexec mount option specifies that the filesystem cannot contain executable binaries.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_flag_partition("/var/tmp","noexec")</AUDIT>
+		<SOLUTION>dummy()</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>3</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "18">
+		<POINT>1.1.11</POINT>
+	        <TITLE>Ensure separate partition exists for /var/log</TITLE>
+	        <DESCRIPTION>The /var/log directory is used by system services to store log data.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_separate_partition("/var/log")</AUDIT>
+		<SOLUTION>dummy()</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>1</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "18">
+		<POINT>1.1.12</POINT>
+	        <TITLE>Ensure separate partition exists for /var/log/audit</TITLE>
+	        <DESCRIPTION>The auditing daemon, auditd, stores log data in the /var/log/audit directory.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_separate_partition("/var/log/audit")</AUDIT>
+		<SOLUTION>dummy()</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>1</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "19">
+		<POINT>1.1.13</POINT>
+	        <TITLE>Ensure separate partition exists for /home</TITLE>
+	        <DESCRIPTION>The /home directory is used to support disk storage needs of local users.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_separate_partition("/home")</AUDIT>
+		<SOLUTION>dummy()</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>1</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "20">
+		<POINT>1.1.14</POINT>
+	        <TITLE>Ensure nodev option set on /home partition</TITLE>
+	        <DESCRIPTION>The nodev mount option specifies that the filesystem cannot contain special devices.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_flag_partition("/home","nodev")</AUDIT>
+		<SOLUTION>dummy()</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>3</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "21">
+		<POINT>1.1.15</POINT>
+	        <TITLE>Ensure nodev option set on /dev/shm partition</TITLE>
+	        <DESCRIPTION>The nodev mount option specifies that the filesystem cannot contain special devices.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_flag_partition("/dev/shm","nodev")</AUDIT>
+		<SOLUTION>dummy()</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>3</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "22">
+		<POINT>1.1.16</POINT>
+	        <TITLE>Ensure nosuid option set on /dev/shm partition</TITLE>
+	        <DESCRIPTION>The nosuid mount option specifies that the filesystem cannot contain setuid files.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_flag_partition("/dev/shm","nosuid")</AUDIT>
+		<SOLUTION>dummy()</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>1</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "23">
+		<POINT>1.1.17</POINT>
+	        <TITLE>Ensure noexec option set on /dev/shm partition</TITLE>
+	        <DESCRIPTION>The noexec mount option specifies that the filesystem cannot contain executable binaries.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_flag_partition("/dev/shm","noexec")</AUDIT>
+		<SOLUTION>dummy()</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>1</SCORE>
+	</ITEM>
+    <ITEM NUMBER = "24">
+		<POINT>1.1.18</POINT>
+	        <TITLE>Ensure nodev option set on /media partition</TITLE>
+	        <DESCRIPTION>The nodev mount option specifies that the filesystem cannot contain special devices.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_flag_partition("/mediab","nodev")</AUDIT>
+		<SOLUTION>dummy()</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>3</SCORE>
+	</ITEM>
+    <ITEM NUMBER = "25">
+		<POINT>1.1.19</POINT>
+	        <TITLE>Ensure nosuid option set on /media partition</TITLE>
+	        <DESCRIPTION>The nosuid mount option specifies that the filesystem cannot contain setuid files.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_flag_partition("/media","nosuid")</AUDIT>
+		<SOLUTION>dummy()</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>1</SCORE>
+	</ITEM>
+    <ITEM NUMBER = "26">
+		<POINT>1.1.20</POINT>
+	        <TITLE>Ensure noexec option set on /media partition</TITLE>
+	        <DESCRIPTION>The noexec mount option specifies that the filesystem cannot contain executable binaries.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_flag_partition("/media","noexec")</AUDIT>
+		<SOLUTION>dummy()</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>1</SCORE>
+	</ITEM>
+    <ITEM NUMBER = "26">
+		<POINT>1.1.21</POINT>
+	        <TITLE>Ensure sticky bit is set on all world-writable directories</TITLE>
+	        <DESCRIPTION>Setting the sticky bit on world writable directories prevents users from deleting or
+	        &#xA; renaming files in that directory that are not owned by them.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_sticky()</AUDIT>
+		<SOLUTION>solve_sticky()</SOLUTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>3</SCORE>
+	</ITEM>
+    <ITEM NUMBER = "27">
+		<POINT>1.1.22</POINT>
+	        <TITLE>Disable Automounting</TITLE>
+	        <DESCRIPTION>autofs allows automatic mounting of devices, typically including CD/DVDs and USB drives.</DESCRIPTION>
+	        <CAUTION>The use portable hard drives is very common for workstation users. If your organization
+	        &#xA; allows the use of portable storage or media on workstations and physical access controls to
+	        &#xA; workstations is considered adequate there is little value add in turning off automounting.</CAUTION>
+	        <AUDIT>check_systemctl_enabled("autofs","disabled")</AUDIT>
+		<SOLUTION>solve_systemctl_enabled("autofs","disable")</SOLUTION>
+		<LEVEL>MEDIUM</LEVEL>
+		<SCORE>4</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "28">
+		<POINT>1.2.1</POINT>
+	        <TITLE>Ensure package manager repositories are configured</TITLE>
+	        <DESCRIPTION>Systems need to have package manager repositories configured to ensure they receive the latest patches and updates.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_yum_repo()</AUDIT>
+		<SOLUTION>dummy()</SOLUTION>
+		<LEVEL>MEDIUM</LEVEL>
+		<SCORE>4</SCORE>
+	</ITEM>
+</CATALOG>

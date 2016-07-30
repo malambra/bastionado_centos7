@@ -358,4 +358,16 @@
 		<LEVEL>MEDIUM</LEVEL>
 		<SCORE>4</SCORE>
 	</ITEM>
+	<ITEM NUMBER = "30">
+		<POINT>1.2.3</POINT>
+	        <TITLE>Ensure gpgcheck is globally activated</TITLE>
+	        <DESCRIPTION>The gpgcheck option, found in the main section of the /etc/yum.conf and individual
+	        &#xA; /etc/yum/repos.d/* files determines if an RPM package's signature is checked prior to its installation.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>gpg_activated()</AUDIT>
+		<SOLUTION>solve_gpg_activated()</SOLUTION>
+		<ACTION>Modify yum config files and put "gpgcheck=1"</ACTION>
+		<LEVEL>MEDIUM</LEVEL>
+		<SCORE>4</SCORE>
+	</ITEM>
 </CATALOG>

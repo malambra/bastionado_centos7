@@ -5,6 +5,57 @@ import os
 #RETURN 0 --> OK
 #RETURN 1 --> CRITICAL
 
+def edit_file(path, cad_orig, cad_res):
+    #Read all lines on file
+    f = open(path, "r")
+    lines = f.readlines()
+    f.close()
+
+    #If the beginning of line without blanks is cad_orig write cad_res else write normal line
+    f = open(path, "w")
+    for line in lines:
+        if line.replace(" ","").startswith(cad_orig):
+            f.write(cad_res+"\n")
+        else:
+            f.write(line)
+    f.close()
+
+def solve_gpg_activated():
+    command1 = "grep -l \"^gpgcheck *=*.0\" /etc/yum.conf"
+    value1 = subprocess.Popen(command1, stdout=subprocess.PIPE, shell=True)
+    num1 = value1.communicate()[0].strip()
+    if num1:
+        edit_file("/etc/yum.conf","gpgcheck=0","gpgcheck=1")
+
+    command2 = "grep -l \"^gpgcheck *=*.0\" /etc/yum.repos/*.repo"
+    value2 = subprocess.Popen(command2, stdout=subprocess.PIPE, shell=True)
+    num2 = value2.communicate()[0].strip()
+    if num2:
+        for value in num2.split():
+            edit_file(value, "gpgcheck=0", "gpgcheck=1")
+
+    check = gpg_activated()
+    if check == 0:
+        return 0
+    else:
+        return 1
+
+
+def gpg_activated():
+    #grep "^word1 *=*.word2"
+    command1 = "grep \"^gpgcheck *=*.0\" /etc/yum.conf|wc -l"
+    value1 = subprocess.Popen(command1, stdout=subprocess.PIPE, shell=True)
+    num1 = value1.communicate()[0].strip()
+
+    command2 = "grep \"^gpgcheck *=*.0\" /etc/yum.repos.d/*.repo|wc -l"
+    value2 = subprocess.Popen(command2, stdout=subprocess.PIPE, shell=True)
+    num2 = value2.communicate()[0].strip()
+    
+    if num1 == "0" and num2 == "0":
+        return 0
+    else:
+        return 1
+
 def solve_yum_gpg():
     #Delete repositories except epel or centos
     epel = "gpg-pubkey-352c64e5-52ae6884"
@@ -24,7 +75,7 @@ def solve_yum_gpg():
 
     #Re-check
     check = check_yum_gpg()
-    if res == 0:
+    if check == 0:
         return 0
     else:
         return 1
@@ -157,7 +208,7 @@ def check_separate_partition(partition):
     value1 = subprocess.Popen(command1, stdout=subprocess.PIPE, shell=True)
     num1 = value1.communicate()[0].strip()
 
-    if num1 == 0:
+    if num1 == "0":
         return 0
     else:
         return 1
@@ -168,7 +219,7 @@ def check_flag_partition(partition, flag):
     value1 = subprocess.Popen(command1, stdout=subprocess.PIPE, shell=True)
     num1 = value1.communicate()[0].strip()
 
-    if num1 == 0:
+    if num1 == "0":
         return 0
     else:
         return 1

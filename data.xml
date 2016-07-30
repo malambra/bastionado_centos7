@@ -8,6 +8,7 @@
 		<CAUTION>- NA -</CAUTION>
 		<AUDIT>check_modprob("cramfs")</AUDIT>
 		<SOLUTION>solve_modprob("cramfs")</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>2</SCORE>
 	</ITEM>
@@ -19,6 +20,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_modprob("freevxfs")</AUDIT>
 		<SOLUTION>solve_modprob("freevxfs")</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>2</SCORE>
 	</ITEM>
@@ -30,6 +32,7 @@
         	<CAUTION>- NA -</CAUTION>
         	<AUDIT>check_modprob("jffs2")</AUDIT>
 		<SOLUTION>solve_modprob("jffs2")</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>2</SCORE>
 	</ITEM>
@@ -41,6 +44,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_modprob("hfs")</AUDIT>
 		<SOLUTION>solve_modprob("hfs")</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>2</SCORE>
 	</ITEM>
@@ -52,6 +56,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_modprob("hfsplus")</AUDIT>
 		<SOLUTION>solve_modprob("hfsplus")</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>2</SCORE>
 	</ITEM>
@@ -64,6 +69,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_modprob("squashfs")</AUDIT>
 		<SOLUTION>solve_modprob("squashfs")</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>2</SCORE>
 	</ITEM>
@@ -77,6 +83,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_modprob("udf")</AUDIT>
 		<SOLUTION>solve_modprob("udf")</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>2</SCORE>
 	</ITEM>
@@ -89,6 +96,7 @@
 	        &#xA; ability to transfer files in this way.</CAUTION>
 	        <AUDIT>check_modprob("vfat")</AUDIT>
 		<SOLUTION>solve_modprob("vfat")</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>2</SCORE>
 	</ITEM>
@@ -99,6 +107,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_separate_partition("/tmp")</AUDIT>
 		<SOLUTION>dummy()</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>3</SCORE>
 	</ITEM>
@@ -109,6 +118,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_flag_partition("/tmp","nodev")</AUDIT>
 		<SOLUTION>dummy()</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>3</SCORE>
 	</ITEM>
@@ -119,6 +129,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_flag_partition("/tmp","nosuid")</AUDIT>
 		<SOLUTION>dummy()</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>3</SCORE>
 	</ITEM>
@@ -129,6 +140,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_flag_partition("/tmp","noexec")</AUDIT>
 		<SOLUTION>dummy()</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>3</SCORE>
 	</ITEM>
@@ -140,6 +152,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_separate_partition("/var")</AUDIT>
 		<SOLUTION>dummy()</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>3</SCORE>
 	</ITEM>
@@ -151,6 +164,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_separate_partition("/var/tmp")</AUDIT>
 		<SOLUTION>dummy()</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>3</SCORE>
 	</ITEM>
@@ -161,6 +175,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_flag_partition("/var/tmp","nodev")</AUDIT>
 		<SOLUTION>dummy()</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>3</SCORE>
 	</ITEM>
@@ -171,6 +186,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_flag_partition("/var/tmp","nosuid")</AUDIT>
 		<SOLUTION>dummy()</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>3</SCORE>
 	</ITEM>
@@ -181,6 +197,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_flag_partition("/var/tmp","noexec")</AUDIT>
 		<SOLUTION>dummy()</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>3</SCORE>
 	</ITEM>
@@ -191,6 +208,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_separate_partition("/var/log")</AUDIT>
 		<SOLUTION>dummy()</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>1</SCORE>
 	</ITEM>
@@ -201,6 +219,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_separate_partition("/var/log/audit")</AUDIT>
 		<SOLUTION>dummy()</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>1</SCORE>
 	</ITEM>
@@ -211,6 +230,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_separate_partition("/home")</AUDIT>
 		<SOLUTION>dummy()</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>1</SCORE>
 	</ITEM>
@@ -221,6 +241,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_flag_partition("/home","nodev")</AUDIT>
 		<SOLUTION>dummy()</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>3</SCORE>
 	</ITEM>
@@ -231,6 +252,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_flag_partition("/dev/shm","nodev")</AUDIT>
 		<SOLUTION>dummy()</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>3</SCORE>
 	</ITEM>
@@ -241,6 +263,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_flag_partition("/dev/shm","nosuid")</AUDIT>
 		<SOLUTION>dummy()</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>1</SCORE>
 	</ITEM>
@@ -251,6 +274,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_flag_partition("/dev/shm","noexec")</AUDIT>
 		<SOLUTION>dummy()</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>1</SCORE>
 	</ITEM>
@@ -261,6 +285,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_flag_partition("/mediab","nodev")</AUDIT>
 		<SOLUTION>dummy()</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>3</SCORE>
 	</ITEM>
@@ -271,6 +296,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_flag_partition("/media","nosuid")</AUDIT>
 		<SOLUTION>dummy()</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>1</SCORE>
 	</ITEM>
@@ -281,6 +307,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_flag_partition("/media","noexec")</AUDIT>
 		<SOLUTION>dummy()</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>1</SCORE>
 	</ITEM>
@@ -292,6 +319,7 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_sticky()</AUDIT>
 		<SOLUTION>solve_sticky()</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>3</SCORE>
 	</ITEM>
@@ -304,6 +332,7 @@
 	        &#xA; workstations is considered adequate there is little value add in turning off automounting.</CAUTION>
 	        <AUDIT>check_systemctl_enabled("autofs","disabled")</AUDIT>
 		<SOLUTION>solve_systemctl_enabled("autofs","disable")</SOLUTION>
+		<ACTION>- NA -</ACTION>
 		<LEVEL>MEDIUM</LEVEL>
 		<SCORE>4</SCORE>
 	</ITEM>
@@ -314,6 +343,18 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_yum_repo()</AUDIT>
 		<SOLUTION>dummy()</SOLUTION>
+		<ACTION>- NA -</ACTION>
+		<LEVEL>MEDIUM</LEVEL>
+		<SCORE>4</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "29">
+		<POINT>1.2.2</POINT>
+	        <TITLE>Ensure GPG keys are configured</TITLE>
+	        <DESCRIPTION>Most packages managers implement GPG key signing to verify package integrity during installation.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_yum_gpg()</AUDIT>
+		<SOLUTION>solve_yum_gpg()</SOLUTION>
+		<ACTION>Delete all gpg repositories except Centos or EPEL</ACTION>
 		<LEVEL>MEDIUM</LEVEL>
 		<SCORE>4</SCORE>
 	</ITEM>

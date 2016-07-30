@@ -5,6 +5,45 @@ import os
 #RETURN 0 --> OK
 #RETURN 1 --> CRITICAL
 
+def solve_yum_gpg():
+    #Delete repositories except epel or centos
+    epel = "gpg-pubkey-352c64e5-52ae6884"
+    centos = "gpg-pubkey-f4a80eb5-53a7ff4b"
+
+    #Obtain list gpg repositories
+    command1 = "rpm -q gpg-pubkey"
+    value1 = subprocess.Popen(command1, stdout=subprocess.PIPE, shell=True)
+    values = value1.communicate()[0].strip()
+
+    #For each gpg if no centos or epel delete it
+    for value in values.split():
+        if value != epel and value != centos:
+            command2="rpm -e "+value+" --allmatches"
+            value2 = subprocess.Popen(command2, stdout=subprocess.PIPE, shell=True)
+            res = value2.communicate()[0].strip()
+
+    #Re-check
+    check = check_yum_gpg()
+    if res == 0:
+        return 0
+    else:
+        return 1
+
+
+def check_yum_gpg():
+    epel="gpg-pubkey-352c64e5-52ae6884"
+    centos="gpg-pubkey-f4a80eb5-53a7ff4b"
+
+    command1="rpm -q gpg-pubkey |egrep -v \""+epel+"|"+centos+"\"|wc -l"
+    value1 = subprocess.Popen(command1, stdout=subprocess.PIPE, shell=True)
+    num1 = value1.communicate()[0].strip()
+
+    if num1 == "0":
+        return 0
+    else:
+        return 1
+
+
 def check_yum_repo():
     #get system language
     #find for "enbled|habilitado" repositories

@@ -95,6 +95,7 @@ def bastiona():
         v_caution = item.find('CAUTION').text
         v_audit = "functions."+item.find('AUDIT').text
         v_solution = "functions."+item.find('SOLUTION').text
+        v_action = item.find('ACTION').text
         v_level = item.find('LEVEL').text
         v_score = item.find('SCORE').text
 
@@ -115,6 +116,7 @@ def bastiona():
             print "Caution: "+v_caution
             if v_solution != "functions.dummy()":
                 print "Solution: " + v_solution
+                print "ACTIONS: " + v_action
                 option = raw_input('Want solve it..[yes|NO]: ')
                 if option == "yes":
                     aux = eval(v_solution)

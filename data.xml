@@ -370,4 +370,28 @@
 		<LEVEL>MEDIUM</LEVEL>
 		<SCORE>4</SCORE>
 	</ITEM>
+	<ITEM NUMBER = "31">
+		<POINT>1.3.1</POINT>
+	        <TITLE>Ensure AIDE is installed</TITLE>
+	        <DESCRIPTION>AIDE takes a snapshot of filesystem state including modification times, permissions, and
+	        &#xA; file hashes which can then be used to compare against the current state of the filesystem to
+	        &#xA; detect modifications to the system.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>rpm_installed("1",['aide'])</AUDIT>
+		<SOLUTION>solve_rpm_installed("1",['aide'])</SOLUTION>
+		<ACTION>Install aide</ACTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>1</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "32">
+		<POINT>1.3.2</POINT>
+	        <TITLE>Ensure filesystem integrity is regularly checked</TITLE>
+	        <DESCRIPTION>Periodic checking of the filesystem integrity is needed to detect changes to the filesystem.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_cron('/usr/sbin/aide --check')</AUDIT>
+		<SOLUTION>add_cron("0","5","/usr/sbin/aide --check")</SOLUTION>
+		<ACTION>Add line in cron to execute aide</ACTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>1</SCORE>
+	</ITEM>
 </CATALOG>

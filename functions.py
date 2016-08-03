@@ -1,9 +1,114 @@
 #!/bin/python
 import subprocess
 import os
+import yum
+import rpm
+from crontab import CronTab
 
 #RETURN 0 --> OK
 #RETURN 1 --> CRITICAL
+
+def add_cron(min,hour,command):
+
+    tab = CronTab(user='root')
+    cron_job = tab.new(command)
+    cron_job.minute.on(min)
+    cron_job.hour.on(hour)
+    tab.write()
+
+    res=check_cron(command)
+    if res == 0:
+        return 0
+    else:
+        return 1
+
+def del_cron(command):
+
+    cron_exist=check_cron(command)
+
+    if cron_exist == 0:
+        tab = CronTab(user='root')
+        tab.remove_all(command)
+        tab.write()
+        res = check_cron(command)
+    if res == 0:
+        return 1
+    else:
+        return 0
+
+def check_cron(command):
+    num = 0
+
+    tab = CronTab(user='root')
+    cron_job = tab.find_command(command)
+
+    for list in cron_job:
+        num = num+1
+
+    if num > 0:
+        return 0
+
+    return 1
+
+def solve_rpm_installed(status,packages):
+    #status 0 --> Remove packages if are installed.
+    #status 1 --> Install packages if dont are installed.
+
+    ts = rpm.TransactionSet()
+    mi = ts.dbMatch()
+    list = []
+    for h in mi:
+        list.append(h['name'])
+
+    yb = yum.YumBase()
+
+    if status == "1":
+        for package in packages:
+            if not yb.rpmdb.searchNevra(name=package):
+                yb.install(name=package)
+                yb.resolveDeps()
+                yb.buildTransaction()
+
+    if status == "0":
+        for package in packages:
+            if yb.rpmdb.searchNevra(name=package):
+                yb.remove(name=package)
+                yb.resolveDeps()
+                yb.buildTransaction()
+
+    yb.processTransaction()
+
+    check=rpm_installed(status, packages)
+    if check == 0:
+        return 0
+    else:
+        return 1
+
+def rpm_installed(status,packages):
+    #status 0 --> Want packages not installed.
+    #status 1 --> Want packages installed.
+
+    ts = rpm.TransactionSet()
+    mi = ts.dbMatch()
+    list = []
+    for h in mi:
+        list.append(h['name'])
+
+    for p in packages:
+        if p in list:
+            if status =="0":
+                print "CRITICAL %s is installed." % (p)
+                return 1
+            if status =="1":
+                print "OK %s is installed." % (p)
+        else:
+            if status == "0":
+                print "OK %s NOT installed."% (p)
+            if status == "1":
+                print "CRITICAL %s is installed:" % (p)
+                return 1
+
+    return 0
 
 def edit_file(path, cad_orig, cad_res):
     #Read all lines on file
@@ -50,7 +155,7 @@ def gpg_activated():
     command2 = "grep \"^gpgcheck *=*.0\" /etc/yum.repos.d/*.repo|wc -l"
     value2 = subprocess.Popen(command2, stdout=subprocess.PIPE, shell=True)
     num2 = value2.communicate()[0].strip()
-    
+
     if num1 == "0" and num2 == "0":
         return 0
     else:

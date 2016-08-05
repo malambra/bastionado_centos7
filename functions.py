@@ -4,9 +4,34 @@ import os
 import yum
 import rpm
 from crontab import CronTab
+import stat
 
 #RETURN 0 --> OK
 #RETURN 1 --> CRITICAL
+
+def solve_stat_file(file,gid,uid,perm):
+    #Set perms, gui and uid to the file.
+    os.chmod(file,perm)
+    os.chown(file,uid,gid)
+
+    res=check_stat_file(file,gid,uid,perm)
+    if res == 0:
+        return 0
+    else:
+        return 1
+
+def check_stat_file(file,gid,uid,perm):
+    #Check perms ex-->0644 , uid ex-->0 and gui ex-->0 of the file done, are same thats recibed
+    fperm = oct(os.stat(file)[stat.ST_MODE])[-4:]
+    fgid = oct(os.stat(file)[stat.ST_GID])
+    fuid = oct(os.stat(file)[stat.ST_UID])
+
+    if fgid == gid and fuid == uid and fperm == perm:
+        return 0
+    else:
+        print "Critical PERMS: %s vs %s, UID: %s vs %s and GID: %s vs %s" % (fperm,perm,fuid,uid,fgid,gid)
+        return 1
+
 
 def add_cron(min,hour,command):
 

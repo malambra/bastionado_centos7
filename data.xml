@@ -394,4 +394,17 @@
 		<LEVEL>LOW</LEVEL>
 		<SCORE>1</SCORE>
 	</ITEM>
+	<ITEM NUMBER = "33">
+		<POINT>1.4.1</POINT>
+	        <TITLE>Ensure permissions on bootloader config are configured</TITLE>
+	        <DESCRIPTION>The grub configuration file contains information on boot settings and passwords for
+	        &#xA; unlocking boot options. The grub configuration is usually located
+	        &#xA; at /boot/grub2/grub.cfg and linked as /etc/grub2.conf.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_stat_file("/boot/grub2/grub.cfg","0","0","0600")</AUDIT>
+		<SOLUTION>solve_stat_file("/boot/grub2/grub.cfg","0","0","0600")</SOLUTION>
+		<ACTION>Modify stats of file, perms, uid, and gid</ACTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>1</SCORE>
+	</ITEM>
 </CATALOG>

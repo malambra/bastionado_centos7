@@ -82,7 +82,6 @@ def ponderar(result,lv,sc):
             sys.exit(1)
 
 
-
 def bastiona():
     tree = ET.parse('data.xml')
     root = tree.getroot()

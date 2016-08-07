@@ -2,8 +2,6 @@
 import os, subprocess, yum, rpm, stat, re
 from crontab import CronTab
 
-
-
 #RETURN 0 --> OK
 #RETURN 1 --> CRITICAL
 

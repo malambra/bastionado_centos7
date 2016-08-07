@@ -1,8 +1,7 @@
 #!/bin/python
 
 import xml.etree.ElementTree as ET
-import os
-import sys
+import os, sys
 import functions
 
 #LIMITS

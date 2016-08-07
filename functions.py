@@ -1,13 +1,40 @@
 #!/bin/python
-import subprocess
-import os
-import yum
-import rpm
+import os, subprocess, yum, rpm, stat, re
 from crontab import CronTab
-import stat
+
+
 
 #RETURN 0 --> OK
 #RETURN 1 --> CRITICAL
+
+def auth_single_mode():
+    res1=grep_file(["/sbin/sulogin"], "/usr/lib/systemd/system/rescue.service")
+    res2=grep_file(["/sbin/sulogin"], "/usr/lib/systemd/system/emergency.service")
+
+    if res1 == 0 and res2 == 0:
+        return 0
+    else:
+        return 1
+
+def grep_file(strs,file):
+    #Search if each str in strs, exist on file
+
+    res = ["0"]*len(strs)
+
+    f = open(file)
+
+    for line in f:
+        line = line.rstrip()
+        pos = 0
+        for st in strs:
+            if re.search(st, line):
+                res[pos]="1"
+            pos=pos+1
+
+    if "0" in res:
+        return 1
+    else:
+        return 0
 
 def solve_stat_file(file,gid,uid,perm):
     #Set perms, gui and uid to the file.
@@ -113,6 +140,7 @@ def rpm_installed(status,packages):
     #status 0 --> Want packages not installed.
     #status 1 --> Want packages installed.
 
+    #Add all packages to list
     ts = rpm.TransactionSet()
     mi = ts.dbMatch()
     list = []

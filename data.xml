@@ -402,8 +402,32 @@
 	        &#xA; at /boot/grub2/grub.cfg and linked as /etc/grub2.conf.</DESCRIPTION>
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>check_stat_file("/boot/grub2/grub.cfg","0","0","0600")</AUDIT>
-		<SOLUTION>solve_stat_file("/boot/grub2/grub.cfg","0","0","0600")</SOLUTION>
+		<SOLUTION>solve_stat_file("/boot/grub2/grub.cfg",0,0,0600)</SOLUTION>
 		<ACTION>Modify stats of file, perms, uid, and gid</ACTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>1</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "34">
+		<POINT>1.4.2</POINT>
+	        <TITLE>Ensure bootloader password is set</TITLE>
+	        <DESCRIPTION>Setting the boot loader password will require that anyone rebooting the system must enter
+	        &#xA; a password before being able to set command line boot parameters.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>grep_file(["^set superusers", "^password"],"/boot/grub2/grub.cfg")</AUDIT>
+		<SOLUTION>dummy()</SOLUTION>
+		<ACTION>Create and configure password for grub</ACTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>1</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "35">
+		<POINT>1.4.3</POINT>
+	        <TITLE>Ensure authentication required for single user mode</TITLE>
+	        <DESCRIPTION>Single user mode (rescue mode) is used for recovery when the system detects an issue
+	        &#xA; during boot or by manual selection from the bootloader.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>auth_single_mode()</AUDIT>
+		<SOLUTION>dummy()</SOLUTION>
+		<ACTION>Create and configure password for grub</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>1</SCORE>
 	</ITEM>

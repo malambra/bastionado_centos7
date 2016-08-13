@@ -459,13 +459,25 @@
 	</ITEM>
 	<ITEM NUMBER = "38">
 		<POINT>1.5.3</POINT>
-	        <TITLE>3 Ensure address space layout randomization (ASLR) is enabled</TITLE>
+	        <TITLE>Ensure address space layout randomization (ASLR) is enabled</TITLE>
 	        <DESCRIPTION>Address space layout randomization (ASLR) is an exploit mitigation technique which
 	        &#xA; randomly arranges the address space of key data areas of a process. Difficult to write memory page exploits.</DESCRIPTION>
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>find_sysctl("kernel.randomize_va_space",2)</AUDIT>
 		<SOLUTION>sysctl_w("kernel.randomize_va_space",2)</SOLUTION>
 		<ACTION>Change sysctl value: kernel.randomize_va_space=2 .</ACTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>1</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "39">
+		<POINT>1.5.4</POINT>
+	        <TITLE>Ensure prelink is disabled </TITLE>
+	        <DESCRIPTION>prelink is a program that modifies ELF shared libraries and ELF dynamically linked
+	        &#xA; binaries in such a way that the time needed for the dynamic linker to perform relocations at startup significantly decreases.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>rpm_installed("0",['prelink'])</AUDIT>
+		<SOLUTION>solve_rpm_installed("0",['prelink'])</SOLUTION>
+		<ACTION>Uninstall prelink rpm</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>1</SCORE>
 	</ITEM>

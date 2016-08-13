@@ -5,6 +5,95 @@ from crontab import CronTab
 #RETURN 0 --> OK
 #RETURN 1 --> CRITICAL
 
+
+
+def check_xd_nx_enabled():
+    #Check if nx or xd are enabled.
+    #dmesg |egrep "NX|XD"|grep "protection:*.active"
+
+    num1=0
+
+    command1 = "dmesg |egrep \"NX|XD\"|grep \"protection:*.active\"|wc -l"
+    value1 = subprocess.Popen(command1, stdout=subprocess.PIPE, shell=True)
+    num1 = value1.communicate()[0].strip()
+
+    if num1 > 0:
+        return 0
+    else:
+        return 1
+
+def solve_core_restrict_dumps():
+    res3 = find_sysctl("fs.suid_dumpable", 0)
+    if res3 == 1:
+        sysctl_w("fs.suid_dumpable", 0)
+
+    aux = int(1)
+    res2 = int(1)
+
+    res1 = grep_file(["hard core"], "/etc/security/limits.conf")
+
+    for dirpath, _, filenames in os.walk("/etc/security/limits.d"):
+        for f in filenames:
+            # Search for each file in "/etc/security/limits.d/"
+            # If find on one file "res2=0" else "res2=1"
+            aux = grep_file(["hard core"], os.path.abspath(os.path.join(dirpath, f)))
+            if aux == 0:
+                res2 = int(0)
+    if res1 == 1 and res2 == 1:
+        edit_file_add_line("/etc/security/limits.d/9999-CIS.conf", "* hard core 0")
+
+    res=check_core_restrict_dumps()
+    if res == 0:
+        return 0
+    else:
+        return 1
+
+def check_core_restrict_dumps():
+    #Ensure core dumps are restricted
+    # grep "hard core" /etc/security/limits.conf /etc/security/limits.d/*
+    aux = int(1)
+    res2 = int(1)
+
+    res1=grep_file(["hard core"], "/etc/security/limits.conf")
+
+    for dirpath,_,filenames in os.walk("/etc/security/limits.d"):
+        for f in filenames:
+            #Search for each file in "/etc/security/limits.d/"
+            #If find on one file "res2=0" else "res2=1"
+            aux = grep_file(["hard core"], os.path.abspath(os.path.join(dirpath, f)))
+            if aux == 0:
+                res2 = int(0)
+
+
+    res3 = find_sysctl("fs.suid_dumpable",0)
+
+    if (res1 == 0 or res2 == 0) and res3 == 0:
+        return 0
+    else:
+        return 1
+
+def sysctl_w(label,value):
+    # Change value sysctl to label = value
+
+    edit_file_add_line("/etc/sysctl.d/9999-CIS.conf", label+" = "+str(value))
+
+    command1 = "sysctl -w "+label+"="+str(value)
+    value1 = subprocess.Popen(command1, stdout=subprocess.PIPE, shell=True)
+    num1 = value1.communicate()[0].strip()
+
+
+
+def find_sysctl(label,value):
+    #Check if sysctl to label, return expected value
+    command1 = "sysctl "+label
+    value1 = subprocess.Popen(command1, stdout=subprocess.PIPE, shell=True)
+    num1 = value1.communicate()[0].strip()
+
+    if num1 == label+" = "+str(value):
+        return 0
+    else:
+        return 1
+
 def auth_single_mode():
     res1=grep_file(["/sbin/sulogin"], "/usr/lib/systemd/system/rescue.service")
     res2=grep_file(["/sbin/sulogin"], "/usr/lib/systemd/system/emergency.service")
@@ -160,6 +249,19 @@ def rpm_installed(status,packages):
                 return 1
 
     return 0
+
+def edit_file_add_line(path, cad):
+    if os.path.isfile(path):
+        aux=grep_file([cad],path)
+        if aux == 1:
+            f= open(path,"a+")
+            f.write(cad+"\n")
+            f.close()
+    else:
+        f = open(path, "a+")
+        f.write(cad+"\n")
+        f.close()
+
 
 def edit_file(path, cad_orig, cad_res):
     #Read all lines on file

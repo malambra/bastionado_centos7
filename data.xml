@@ -431,4 +431,42 @@
 		<LEVEL>LOW</LEVEL>
 		<SCORE>1</SCORE>
 	</ITEM>
+	<ITEM NUMBER = "36">
+		<POINT>1.5.1</POINT>
+	        <TITLE>Ensure core dumps are restricted</TITLE>
+	        <DESCRIPTION>A core dump is the memory of an executable program. It is generally used to determine
+	        &#xA; why a program aborted. It can also be used to glean confidential information from a core
+	        &#xA; file. The system provides the ability to set a soft limit for core dumps, but this can be overridden by the user.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_core_restrict_dumps()</AUDIT>
+		<SOLUTION>solve_core_restrict_dumps()</SOLUTION>
+		<ACTION>Edit system limits and sysconfig.</ACTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>1</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "37">
+		<POINT>1.5.2</POINT>
+	        <TITLE>Ensure XD/NX support is enabled</TITLE>
+	        <DESCRIPTION>Recent processors in the x86 family support the ability to prevent code execution on a per
+	        &#xA; memory page basis. Generically and on AMD processors, this ability is called No Execute
+	        &#xA; (NX), while on Intel processors it is called Execute Disable (XD).</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>check_xd_nx_enabled()</AUDIT>
+		<SOLUTION>dummy()</SOLUTION>
+		<ACTION>Activate protection in BIOS, in 64 bits system require PAE Kernel.</ACTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>1</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "38">
+		<POINT>1.5.3</POINT>
+	        <TITLE>3 Ensure address space layout randomization (ASLR) is enabled</TITLE>
+	        <DESCRIPTION>Address space layout randomization (ASLR) is an exploit mitigation technique which
+	        &#xA; randomly arranges the address space of key data areas of a process. Difficult to write memory page exploits.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>find_sysctl("kernel.randomize_va_space",2)</AUDIT>
+		<SOLUTION>sysctl_w("kernel.randomize_va_space",2)</SOLUTION>
+		<ACTION>Change sysctl value: kernel.randomize_va_space=2 .</ACTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>1</SCORE>
+	</ITEM>
 </CATALOG>

@@ -413,7 +413,7 @@
 	        <DESCRIPTION>Setting the boot loader password will require that anyone rebooting the system must enter
 	        &#xA; a password before being able to set command line boot parameters.</DESCRIPTION>
 	        <CAUTION>- NA -</CAUTION>
-	        <AUDIT>grep_file(["^set superusers", "^password"],"/boot/grub2/grub.cfg")</AUDIT>
+	        <AUDIT>grep_file(["^set superusers", "^password"],"/boot/grub2/grub.cfg", 0)</AUDIT>
 		<SOLUTION>dummy()</SOLUTION>
 		<ACTION>Create and configure password for grub</ACTION>
 		<LEVEL>LOW</LEVEL>
@@ -477,6 +477,18 @@
 	        <CAUTION>- NA -</CAUTION>
 	        <AUDIT>rpm_installed("0",['prelink'])</AUDIT>
 		<SOLUTION>solve_rpm_installed("0",['prelink'])</SOLUTION>
+		<ACTION>Uninstall prelink rpm</ACTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>1</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "40">
+		<POINT>1.6.1.1</POINT>
+	        <TITLE>Ensure SELinux is not disabled in bootloader configuration</TITLE>
+	        <DESCRIPTION>Configure SELINUX to be enabled at boot time and verify that it has not been overwritten
+	        &#xA; by the grub boot parameters.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>grep_file(["selinux *=*.0","enforcing *=*.0"],"/boot/grub2/grub.cfg", 1)</AUDIT>
+		<SOLUTION>dummy()</SOLUTION>
 		<ACTION>Uninstall prelink rpm</ACTION>
 		<LEVEL>LOW</LEVEL>
 		<SCORE>1</SCORE>

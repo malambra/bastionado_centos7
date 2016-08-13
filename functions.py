@@ -30,13 +30,13 @@ def solve_core_restrict_dumps():
     aux = int(1)
     res2 = int(1)
 
-    res1 = grep_file(["hard core"], "/etc/security/limits.conf")
+    res1 = grep_file(["hard core"], "/etc/security/limits.conf", 0)
 
     for dirpath, _, filenames in os.walk("/etc/security/limits.d"):
         for f in filenames:
             # Search for each file in "/etc/security/limits.d/"
             # If find on one file "res2=0" else "res2=1"
-            aux = grep_file(["hard core"], os.path.abspath(os.path.join(dirpath, f)))
+            aux = grep_file(["hard core"], os.path.abspath(os.path.join(dirpath, f)), 0)
             if aux == 0:
                 res2 = int(0)
     if res1 == 1 and res2 == 1:
@@ -54,13 +54,13 @@ def check_core_restrict_dumps():
     aux = int(1)
     res2 = int(1)
 
-    res1=grep_file(["hard core"], "/etc/security/limits.conf")
+    res1=grep_file(["hard core"], "/etc/security/limits.conf", 0)
 
     for dirpath,_,filenames in os.walk("/etc/security/limits.d"):
         for f in filenames:
             #Search for each file in "/etc/security/limits.d/"
             #If find on one file "res2=0" else "res2=1"
-            aux = grep_file(["hard core"], os.path.abspath(os.path.join(dirpath, f)))
+            aux = grep_file(["hard core"], os.path.abspath(os.path.join(dirpath, f)), 0)
             if aux == 0:
                 res2 = int(0)
 
@@ -95,16 +95,18 @@ def find_sysctl(label,value):
         return 1
 
 def auth_single_mode():
-    res1=grep_file(["/sbin/sulogin"], "/usr/lib/systemd/system/rescue.service")
-    res2=grep_file(["/sbin/sulogin"], "/usr/lib/systemd/system/emergency.service")
+    res1=grep_file(["/sbin/sulogin"], "/usr/lib/systemd/system/rescue.service", 0)
+    res2=grep_file(["/sbin/sulogin"], "/usr/lib/systemd/system/emergency.service", 0)
 
     if res1 == 0 and res2 == 0:
         return 0
     else:
         return 1
 
-def grep_file(strs,file):
+def grep_file(strs,file,exist):
     #Search if each str in strs, exist on file
+    #exist 0 --> Want str exist
+    #exist 1 --> Want str DONT exist
 
     res = ["0"]*len(strs)
 
@@ -118,10 +120,17 @@ def grep_file(strs,file):
                 res[pos]="1"
             pos=pos+1
 
-    if "0" in res:
-        return 1
+    if exist == 0:
+        if "0" in res:
+            return 1
+        else:
+            return 0
+
     else:
-        return 0
+        if "0" in res:
+            return 0
+        else:
+            return 1
 
 def solve_stat_file(file,gid,uid,perm):
     #Set perms, gui and uid to the file.
@@ -252,8 +261,8 @@ def rpm_installed(status,packages):
 
 def edit_file_add_line(path, cad):
     if os.path.isfile(path):
-        aux=grep_file([cad],path)
-        if aux == 1:
+        aux=grep_file([cad],path, 1)
+        if aux == 0:
             f= open(path,"a+")
             f.write(cad+"\n")
             f.close()

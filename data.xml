@@ -493,4 +493,51 @@
 		<LEVEL>LOW</LEVEL>
 		<SCORE>1</SCORE>
 	</ITEM>
+	<ITEM NUMBER = "41">
+		<POINT>1.6.1.2</POINT>
+	        <TITLE>Ensure the SELinux state is enforcing</TITLE>
+	        <DESCRIPTION>Set SELinux to enable when the system is booted.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>grep_file(["^SELINUX=enforcing"],"/etc/selinux/config", 0)</AUDIT>
+		<SOLUTION>edit_file("/etc/selinux/config", "SELINUX=", "SELINUX=enforcing")</SOLUTION>
+		<ACTION>Put SELINUX=enforcing on /etc/selinux/config.</ACTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>1</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "42">
+		<POINT>1.6.1.3</POINT>
+	        <TITLE>Ensure SELinux policy is configured</TITLE>
+	        <DESCRIPTION>Configure SELinux to meet or exceed the default targeted policy, which constrains daemons and system software only.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>grep_file(["^SELINUXTYPE=targeted"],"/etc/selinux/config", 0)</AUDIT>
+		<SOLUTION>edit_file("/etc/selinux/config", "SELINUXTYPE=", "SELINUXTYPE=targeted")</SOLUTION>
+		<ACTION>Put SELINUXTYPE=targeted on /etc/selinux/config.</ACTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>1</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "43">
+		<POINT>1.6.1.4</POINT>
+	        <TITLE>Ensure SETroubleshoot is not installed</TITLE>
+	        <DESCRIPTION>The SETroubleshoot service notifies desktop users of SELinux denials through a user-
+	        &#xA; friendly interface. The service provides important information around configuration errors,
+	        &#xA; unauthorized intrusions, and other potential errors.</DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+				<AUDIT>rpm_installed("0",['setroubleshoot'])</AUDIT>
+		<SOLUTION>solve_rpm_installed("0",['setroubleshoot'])</SOLUTION>
+		<ACTION>Uninstall setroubleshoot rpm</ACTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>1</SCORE>
+	</ITEM>
+	<ITEM NUMBER = "44">
+		<POINT>1.6.1.5</POINT>
+	        <TITLE> Ensure the MCS Translation Service (mcstrans) is not installed</TITLE>
+	        <DESCRIPTION>The mcstransd daemon provides category label information to client processes requesting
+	        &#xA; information. The label translations are defined in /etc/selinux/targeted/setrans.conf </DESCRIPTION>
+	        <CAUTION>- NA -</CAUTION>
+	        <AUDIT>rpm_installed("0",['mcstrans'])</AUDIT>
+		<SOLUTION>solve_rpm_installed("0",['mcstrans'])</SOLUTION>
+		<ACTION>Uninstall mcstransd rpm</ACTION>
+		<LEVEL>LOW</LEVEL>
+		<SCORE>1</SCORE>
+	</ITEM>
 </CATALOG>

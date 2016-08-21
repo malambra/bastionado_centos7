@@ -287,6 +287,13 @@ def edit_file(path, cad_orig, cad_res):
             f.write(line)
     f.close()
 
+    check=grep_file([cad_res],path, 0)
+    if check == 0:
+        return 0
+    else:
+        return 1
+
+
 def solve_gpg_activated():
     command1 = "grep -l \"^gpgcheck *=*.0\" /etc/yum.conf"
     value1 = subprocess.Popen(command1, stdout=subprocess.PIPE, shell=True)
